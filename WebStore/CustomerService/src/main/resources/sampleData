@@ -1,0 +1,47 @@
+{
+   "fistName":"Anil",
+   "lastName":"Maharjan",
+   "address":{
+       "street":"1000 N",
+       "city":"Fairfield",
+       "zip":"52557"
+        },
+   "phone":"641",
+   "email":"anil.maharjan@hotmail.com"
+}
+
+{
+   "fistName":"Siddhant",
+   "lastName":"Pageni",
+   "address":{
+       "street":"1000 N",
+       "city":"Fairfield",
+       "zip":"52557"
+        },
+   "phone":"641-11-12",
+   "email":"siddhant.pageni@hotmail.com"
+}
+
+{
+   "fistName":"MD",
+   "lastName":"Fakrul",
+   "address":{
+       "street":"1000 N",
+       "city":"Fairfield",
+       "zip":"52557"
+        },
+   "phone":"641-11-1122",
+   "email":"md.fakrul@hotmail.com"
+}
+
+{
+   "fistName":"Eria",
+   "lastName":"Pinyi",
+   "address":{
+       "street":"1000 N",
+       "city":"Fairfield",
+       "zip":"52557"
+        },
+   "phone":"641-11-1132",
+   "email":"Eria.Pinyi@hotmail.com"
+}

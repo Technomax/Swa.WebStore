@@ -1,0 +1,16 @@
+{
+   "productNumber":"001",
+   "name":"ProX",
+   "price":3.12,
+   "description":"Probiotic product",
+   "numberInStock":100
+}
+
+{
+   "productNumber":"002",
+   "name":"Biscuit",
+   "price":2.11,
+   "description":"Biscuit product",
+   "numberInStock":500
+
+}

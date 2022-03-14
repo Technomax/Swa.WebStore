@@ -1,0 +1,40 @@
+{
+    "id": 1,
+    "customer": {
+        "id": 2,
+        "fistName": "Anil",
+        "lastName": "Maharjan",
+        "address": {
+            "street": "1000 N",
+            "city": "Fairfield",
+            "zip": "52557"
+        },
+        "phone": "641",
+        "email": "anil.maharjan@hotmail.com"
+    },
+    "products": [
+        {
+            "id": 2,
+            "productNumber": "002",
+            "name": "Biscuit",
+            "price": 2.11,
+            "taxable": null,
+            "applicableDiscount": 0.0,
+            "description": "Biscuit product",
+            "quantity": 0,
+            "status": null
+        },
+        {
+            "id": 1,
+            "productNumber": "001",
+            "name": "ProX",
+            "price": 3.12,
+            "taxable": null,
+            "applicableDiscount": 0.0,
+            "description": "Probiotic product",
+            "quantity": 40,
+            "status": null
+        }
+    ],
+    "status": null
+}

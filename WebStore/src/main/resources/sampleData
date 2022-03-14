@@ -1,0 +1,14 @@
+{
+    "customer":{
+    "id":2,
+    "fistName":"Anil",
+    "lastName":"Maharjan",
+    "address":{
+       "street":"1000 N",
+       "city":"Fairfield",
+       "zip":"52557"
+        },
+   "phone":"641",
+   "email":"anil.maharjan@hotmail.com"
+}
+}
