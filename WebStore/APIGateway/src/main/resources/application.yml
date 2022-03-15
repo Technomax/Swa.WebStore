@@ -1,0 +1,50 @@
+server:
+  port: 8080
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: APIGateway
+  cloud:
+    gateway:
+      routes:
+        - id: PRODUCT-SERVICE
+          uri: http://localhost:8092
+          predicates:
+            - Path=/product/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: PRODUCT-SERVICE
+                fallbackUri: forward:/product-fallback
+            - name: Retry
+              args:
+                retries: 3
+                methods: GET
+                backoff:
+                  firstBackoff: 50ms
+                  maxBackoff: 500ms
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1
+  resilience4j:
+    circuitbreaker:
+      instances:
+        PRODUCT-SERVICE:
+          slidingWindowSize: 10
+          permittedNumberOfCallsInHalfOpenState: 5
+          failureRateThreshold: 50
+          waitDurationInOpenState: 10000
+          registerHealthIndicator: true
+    timelimiter:
+      instances:
+        PRODUCT-SERVICE:
+          timeoutDuration: 2s
+
+
