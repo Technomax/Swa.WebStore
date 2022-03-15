@@ -1,11 +1,13 @@
 spring:
   application:
     name: EurekaServer
+server:
+  port: 8090
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8090/eureka
   server:
     wait-time-in-ms-when-sync-empty: 0

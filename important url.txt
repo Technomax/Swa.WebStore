@@ -1,2 +1,5 @@
 #for Circuit breaker in APIGateway
 https://www.youtube.com/watch?v=wYk0JrNdb8g
+
+#for passing header details in request call
+https://www.baeldung.com/spring-response-header

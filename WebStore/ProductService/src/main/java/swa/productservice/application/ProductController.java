@@ -45,6 +45,7 @@ public class ProductController {
 
     @GetMapping("/view/{id}")
     public ProductDto get(@PathVariable long id) {
+        System.out.println("Product Service A");
         return servicePort.getProductById(id);
     }
 }
