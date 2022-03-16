@@ -59,7 +59,7 @@ public class WebStoreClientApplication implements CommandLineRunner {
 //        System.out.println("Showing the cart");
 //        System.out.println("===============");
 //        System.out.println("Cart::" + restTemplate.getForObject("http://localhost:8080/shoppingcart/view/4", ShoppingCartDto.class));
-        System.out.println("remove product from the cart (Request body is not allowed with delete. However it working with postman)");
+//        System.out.println("remove product from the cart (Request body is not allowed with delete. However it working with postman)");
 //      http://localhost:8080/shoppingcart/removeproduct/4
 //        {
 //            "id":8,

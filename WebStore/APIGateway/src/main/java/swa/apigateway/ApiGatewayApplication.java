@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableDiscoveryClient
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
