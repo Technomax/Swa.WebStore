@@ -1,19 +1,35 @@
 package swa.shoppingcartservice.application;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 import swa.shoppingcartservice.domain.data.ProductDto;
 import swa.shoppingcartservice.domain.data.ShoppingCartDto;
 import swa.shoppingcartservice.domain.ports.api.ShoppingCartServicePort;
+import swa.shoppingcartservice.infrastructure.integration.ISender;
+import swa.shoppingcartservice.infrastructure.integration.Sender;
 import swa.shoppingcartservice.infrastructure.utility.SequenceGeneratorService;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/shoppingcart")
 public class ShoppingCartController {
     @Autowired
     private ShoppingCartServicePort servicePort;
+
+    @Autowired
+    @Lazy
+    private RestOperations restTemplate;
+
+    @Autowired
+    ISender sender;
 
     private SequenceGeneratorService sequenceGenerator;
 
@@ -26,26 +42,71 @@ public class ShoppingCartController {
     @PostMapping("/create")
     public ShoppingCartDto create(@RequestBody ShoppingCartDto dtoModel) {
         dtoModel.setId(sequenceGenerator.generateSequence("ShoppingCart_sequence"));
-        return servicePort.addShoppingCart(dtoModel);
+        try {
+            ShoppingCartDto returnCart = servicePort.addShoppingCart(dtoModel);
+            sender.send("topicShoppingCart", sender.stringObject(returnCart));
+            return returnCart;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @PutMapping("/addproduct/{cart}")
     public ShoppingCartDto addProduct(@PathVariable long cart, @RequestBody ProductDto productDto) {
-        return servicePort.addProduct(cart, productDto);
+        try {
+            ShoppingCartDto returnCart = servicePort.addProduct(cart, productDto);
+            sender.send("topicShoppingCart", sender.stringObject(returnCart));
+            return returnCart;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @DeleteMapping("/removeproduct/{cart}")
     public ShoppingCartDto removeProduct(@PathVariable long cart, @RequestBody ProductDto productDto) {
-        return servicePort.removeProduct(cart, productDto);
+        try {
+            ShoppingCartDto returnCart = servicePort.removeProduct(cart, productDto);
+            sender.send("topicShoppingCart", sender.stringObject(returnCart));
+            return returnCart;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @PutMapping("/changequantity/{cart}")
     public ShoppingCartDto changeQuantity(@PathVariable long cart, @RequestBody ProductDto productDto) {
-        return servicePort.updateProduct(cart, productDto);
+        try {
+            ShoppingCartDto returnCart = servicePort.updateProduct(cart, productDto);
+            sender.send("topicShoppingCart", sender.stringObject(returnCart));
+            return returnCart;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @GetMapping("/view/{id}")
-    public ShoppingCartDto get(@PathVariable long id) {
-        return servicePort.getShoppingCartById(id);
+    public ShoppingCartDto get(@PathVariable long id) throws JsonProcessingException {
+        try {
+            ShoppingCartDto returnCart = servicePort.getShoppingCartById(id);
+            sender.send("topicShoppingCart", sender.stringObject(returnCart));
+            return returnCart;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @PutMapping("/checkout/{cart}")
+    public String checkout(@PathVariable long cart, @RequestBody ShoppingCartDto cartDto) {
+        try {
+            restTemplate.postForLocation("http://localhost:8080/order/create", cartDto,ShoppingCartDto.class);
+            return "Success";
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @Bean
+    RestOperations restTemplate() {
+        return new RestTemplate();
     }
 }

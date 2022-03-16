@@ -28,6 +28,10 @@ spring:
           uri: lb://CART-SERVICE
           predicates:
             - Path=/shoppingcart/**
+        - id: CART-SERVICE-VIEWER
+          uri: lb://CART-SERVICE-VIEWER
+          predicates:
+            - Path=/shoppingcartviewer/**
           filters:
             - name: CircuitBreaker
               args:
