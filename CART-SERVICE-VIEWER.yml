@@ -1,5 +1,11 @@
 server:
   port: 0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8090/eureka/, http://localhost:8089/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
 spring:
   data:
     mongodb:
@@ -19,9 +25,3 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8090/eureka/, http://localhost:8089/eureka/
-  instance:
-    instance-id: ${spring.application.name}:${random.value}
