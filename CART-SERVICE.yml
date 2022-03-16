@@ -30,7 +30,3 @@ eureka:
       defaultZone: http://localhost:8090/eureka/, http://localhost:8089/eureka/
   instance:
     instance-id: ${spring.application.name}:${random.value}
-logging:
-  level: ERROR
-org:
-  springframework: ERROR
