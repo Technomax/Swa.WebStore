@@ -7,7 +7,6 @@ eureka:
       defaultZone: http://localhost:8090/eureka/, http://localhost:8089/eureka/
   instance:
     instance-id: ${spring.application.name}:${random.value}
-
 spring:
   data:
     mongodb:
@@ -24,9 +23,9 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-sleuth:
-  sampler:
-    probability: 1
+  sleuth:
+    sampler:
+      probability: 1
 logging:
   level:
     root: ERROR
