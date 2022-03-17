@@ -24,7 +24,8 @@ public class CustomerController {
 
     @PostMapping("/add")
     public CustomerDto create(@RequestBody CustomerDto dtoModel) {
-        dtoModel.setId(sequenceGenerator.generateSequence("customer_sequence"));
+        if(!sequenceGenerator.checkIfExist(dtoModel.getId(),"customer_sequence"))
+            dtoModel.setId(sequenceGenerator.generateSequence("customer_sequence"));
         return servicePort.addCustomer(dtoModel);
     }
 

@@ -24,22 +24,27 @@ public class ProductController {
 
     @PostMapping("/add")
     public ProductDto create(@RequestBody ProductDto dtoModel) {
-        dtoModel.setId(sequenceGenerator.generateSequence("product_sequence"));
+        System.out.println("Product Service A");
+        if (!sequenceGenerator.checkIfExist(dtoModel.getId(),"product_sequence"))
+            dtoModel.setId(sequenceGenerator.generateSequence("product_sequence"));
         return servicePort.addProduct(dtoModel);
     }
 
     @PutMapping("/update")
     public ProductDto update(@RequestBody ProductDto ProductDto) {
+        System.out.println("Product Service A");
         return servicePort.addProduct(ProductDto);
     }
 
     @DeleteMapping("/remove/{id}")
     public void delete(@PathVariable long id) {
+        System.out.println("Product Service A");
         servicePort.deleteProductById(id);
     }
 
     @GetMapping("/list")
     public List<ProductDto> gets() {
+        System.out.println("Product Service A");
         return servicePort.getProducts();
     }
 

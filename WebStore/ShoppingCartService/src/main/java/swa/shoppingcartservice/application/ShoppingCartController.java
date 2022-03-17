@@ -41,7 +41,8 @@ public class ShoppingCartController {
 
     @PostMapping("/create")
     public ShoppingCartDto create(@RequestBody ShoppingCartDto dtoModel) {
-        dtoModel.setId(sequenceGenerator.generateSequence("ShoppingCart_sequence"));
+        if (!sequenceGenerator.checkIfExist(dtoModel.getId(),"ShoppingCart_sequence"))
+            dtoModel.setId(sequenceGenerator.generateSequence("ShoppingCart_sequence"));
         try {
             ShoppingCartDto returnCart = servicePort.addShoppingCart(dtoModel);
             sender.send("topicShoppingCart", sender.stringObject(returnCart));
